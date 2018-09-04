@@ -25,6 +25,7 @@ class Tinylink(models.Model):
         getattr(settings, 'AUTH_USER_MODEL', 'auth.User'),
         verbose_name=_('Author'),
         related_name="tinylinks",
+        on_delete=models.CASCADE
     )
 
     long_url = models.CharField(
