@@ -121,8 +121,9 @@ class TinylinkRedirectView(RedirectView):
         if tinylink:
             # set the redirect long URL
             self.url = tinylink.long_url
-            tinylink.amount_of_views += 1
-            tinylink.save()
+            # HOTFIX to avoid massive updates
+            #tinylink.amount_of_views += 1
+            #tinylink.save()
         return super(TinylinkRedirectView, self).dispatch(*args, **kwargs)
 
     def get_redirect_url(self, **kwargs):
