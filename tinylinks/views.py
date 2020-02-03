@@ -121,13 +121,18 @@ class TinylinkRedirectView(RedirectView):
         if tinylink:
             # set the redirect long URL
             self.url = tinylink.long_url
-            # HOTFIX to avoid massive updates
-            #tinylink.amount_of_views += 1
-            #tinylink.save()
         return super(TinylinkRedirectView, self).dispatch(*args, **kwargs)
 
     def get_redirect_url(self, **kwargs):
-        return self.url
+        args = self.request.META.get('QUERY_STRING', '')
+        if args and self.query_string:
+            if '?' in self.url:
+                url = f'{self.url}&{args}'
+            else:
+                url = f'{self.url}?{args}'
+        else:
+            url = self.url
+        return url
 
 
 class StatisticsView(ListView):
