@@ -1,12 +1,10 @@
 """Models for the ``django-tinylinks`` app."""
 from django.db import models
 from django.conf import settings
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django.utils.timezone import now, timedelta
 
 
-@python_2_unicode_compatible
 class Tinylink(models.Model):
     """
     Model to 'translate' long URLs into small ones.
